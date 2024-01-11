@@ -7,12 +7,15 @@ const Cpf_1 = __importDefault(require("./Cpf"));
 const DefaultFreightCalculator_1 = __importDefault(require("./DefaultFreightCalculator"));
 const OrderItem_1 = __importDefault(require("./OrderItem"));
 class Order {
-    constructor(cpf, date = new Date(), freightCalculator = new DefaultFreightCalculator_1.default()) {
+    constructor(cpf, date = new Date(), freightCalculator = new DefaultFreightCalculator_1.default(), sequence = 1) {
         this.date = date;
         this.freightCalculator = freightCalculator;
+        this.sequence = sequence;
         this.cpf = new Cpf_1.default(cpf);
         this.orderItems = [];
         this.freight = 0;
+        const year = date.getFullYear();
+        this.code = `${year}${sequence.toString().padStart(8, "0")}`;
     }
     addItem(item, quantity) {
         this.freight += this.freightCalculator.calculate(item) * quantity;
