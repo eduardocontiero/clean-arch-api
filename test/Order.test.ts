@@ -127,7 +127,7 @@ test("Deve criar um pedido com código", function(){
     order.addItem(new Item(6, "Acessórios","Cabo",3,10,10,10,0.9), 3);
 
 
-    const code = order.code;
+    const code = order.getCode();
 
     expect(code).toBe("202400000001");
 });

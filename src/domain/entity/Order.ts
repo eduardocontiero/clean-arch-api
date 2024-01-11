@@ -3,21 +3,26 @@ import Cpf from "./Cpf";
 import DefaultFreightCalculator from "./DefaultFreightCalculator";
 import FreightCalculator from "./FreightCalculator";
 import Item from "./Item";
+import OrderCode from "./OrderCode";
 import OrderItem from "./OrderItem";
 
 export default class Order {
     cpf: Cpf;
-    orderItems: OrderItem[];
+    private orderItems: OrderItem[];
     coupon: Coupon | undefined;
     private freight: number;
-    code: string;
+    private code: OrderCode;
 
     constructor(cpf: string, readonly date: Date = new Date(), readonly freightCalculator: FreightCalculator = new DefaultFreightCalculator(), readonly sequence: number = 1) {
         this.cpf = new Cpf(cpf);
         this.orderItems = [];
         this.freight = 0;
-        const year = date.getFullYear();
-        this.code = `${year}${sequence.toString().padStart(8, "0")}`;
+        this.code = new OrderCode(date, sequence);
+       
+    }
+
+    getCode(){
+        return this.code.value;
     }
 
     addItem(item: Item, quantity: number) {
