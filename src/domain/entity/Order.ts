@@ -21,10 +21,7 @@ export default class Order {
        
     }
 
-    getCode(){
-        return this.code.value;
-    }
-
+    
     addItem(item: Item, quantity: number) {
         this.freight += this.freightCalculator.calculate(item) * quantity;
         this.orderItems.push(new OrderItem(item.idItem, item.price, quantity));
@@ -41,6 +38,20 @@ export default class Order {
     getFreight() {
         return this.freight;
     }
+
+    getCode(){
+        return this.code.value;
+    }
+
+    getCpf(){
+        return this.cpf.value;
+    }
+
+    getOrderItems(){
+        return this.orderItems;
+    }
+
+
 
 
     getTotal() {

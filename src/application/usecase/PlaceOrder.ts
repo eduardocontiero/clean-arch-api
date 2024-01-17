@@ -19,7 +19,10 @@ export default class PlaceOrder {
             if (!item) throw new Error("Item not found");
 
             order.addItem(item, orderItem.quantity);
+
+            
         }
+
 
         if (input.coupon) {
             const coupon = await this.couponRepository.findByCode(input.coupon);
