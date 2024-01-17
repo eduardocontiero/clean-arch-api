@@ -5,9 +5,10 @@ export default class MysqlConnectionAdapter implements DbConnection {
 
 
   mysql: Connection;
+  static instance: MysqlConnectionAdapter;
 
 
-  constructor() {
+  private constructor() {
     this.mysql = mysql.createConnection({
       host: 'localhost',
       user: 'root',
@@ -15,6 +16,15 @@ export default class MysqlConnectionAdapter implements DbConnection {
       database: 'order_clean_arch'
     });
   }
+
+  static getInstance(){
+    if(!MysqlConnectionAdapter.instance){
+      MysqlConnectionAdapter.instance = new MysqlConnectionAdapter();
+    }
+
+    return MysqlConnectionAdapter.instance;
+  }
+
   async query(statement: string, params: any[]): Promise<any> {
 
     return new Promise((resolve, reject) => {

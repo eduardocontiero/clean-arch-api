@@ -5,6 +5,7 @@ import DbConnection from "../../database/DbConnection";
 export default class OrderRepositoryDatabase implements OrderRepository {
 
     constructor(readonly connection: DbConnection) { }
+   
 
     async save(order: Order): Promise<void> {
 
@@ -20,6 +21,11 @@ export default class OrderRepositoryDatabase implements OrderRepository {
         const [orderData] = await this.connection.query("SELECT COUNT(*) AS count FROM `order`", []);
 
         return orderData.count;
+    }
+
+    async clear(): Promise<void> {
+        await this.connection.query("delete from order_clean_arch.order_item", []);
+        await this.connection.query("delete from order_clean_arch.order", []);
     }
 
 }

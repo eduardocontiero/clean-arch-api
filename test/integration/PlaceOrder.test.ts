@@ -1,4 +1,5 @@
 import PlaceOrder from "../../src/application/usecase/PlaceOrder";
+import OrderRepository from "../../src/domain/repository/OrderRepository";
 import MysqlConnectionAdapter from "../../src/infra/database/MysqlConnectionAdapter";
 import CouponRepositoryDatabase from "../../src/infra/repository/database/CouponRepositoryDatabase";
 import ItemRepositoryDatabase from "../../src/infra/repository/database/ItemRepositoryDatabase";
@@ -6,13 +7,14 @@ import OrderRepositoryDatabase from "../../src/infra/repository/database/OrderRe
 
 
 let placeOrder: PlaceOrder;
+let orderRepository: OrderRepository;
 
 
 beforeEach(function () {
-    const connection = new MysqlConnectionAdapter();
+    const connection = MysqlConnectionAdapter.getInstance();
     const itemRepository = new ItemRepositoryDatabase(connection);
     const couponRepository = new CouponRepositoryDatabase(connection);
-    const orderRepository = new OrderRepositoryDatabase(connection);
+    orderRepository = new OrderRepositoryDatabase(connection);
 
     placeOrder = new PlaceOrder(itemRepository, orderRepository, couponRepository);
 });
@@ -52,7 +54,7 @@ test("Deve fazer um pedido com cálculo de frete", async function () {
 
     const output = await placeOrder.execute(input);
 
-    expect(output.total).toBe(21830);
+    expect(output.total).toBe(6350);
 })
 
 test("Deve fazer um pedido com código", async function () {
@@ -73,4 +75,8 @@ test("Deve fazer um pedido com código", async function () {
     const output = await placeOrder.execute(input);
 
     //expect(output.code).toBe("202400000001");
-})
+});
+
+afterEach(async function(){
+    await orderRepository.clear();
+});

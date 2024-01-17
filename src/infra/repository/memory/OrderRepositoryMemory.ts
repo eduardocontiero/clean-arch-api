@@ -8,6 +8,7 @@ export default class OrderRepositoryMemory implements OrderRepository {
     constructor() {
         this.orders = [];
     }
+   
 
     save(order: Order): Promise<void> {
         this.orders.push(order);
@@ -16,6 +17,10 @@ export default class OrderRepositoryMemory implements OrderRepository {
 
     count(): Promise<number> {
         return Promise.resolve(this.orders.length);
+    }
+
+    async clear(): Promise<void> {
+       this.orders = [];
     }
 
 }
