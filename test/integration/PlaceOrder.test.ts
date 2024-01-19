@@ -1,8 +1,7 @@
-import PlaceOrder from "../../src/application/usecase/PlaceOrder";
+import PlaceOrder from "../../src/application/usecase/place_order/PlaceOrder";
 import OrderRepository from "../../src/domain/repository/OrderRepository";
 import MysqlConnectionAdapter from "../../src/infra/database/MysqlConnectionAdapter";
-import CouponRepositoryDatabase from "../../src/infra/repository/database/CouponRepositoryDatabase";
-import ItemRepositoryDatabase from "../../src/infra/repository/database/ItemRepositoryDatabase";
+import DatabaseRepositoryFactory from "../../src/infra/factory/DatabaseRepositoryFactory";
 import OrderRepositoryDatabase from "../../src/infra/repository/database/OrderRepositoryDatabase";
 
 
@@ -12,11 +11,10 @@ let orderRepository: OrderRepository;
 
 beforeEach(function () {
     const connection = MysqlConnectionAdapter.getInstance();
-    const itemRepository = new ItemRepositoryDatabase(connection);
-    const couponRepository = new CouponRepositoryDatabase(connection);
     orderRepository = new OrderRepositoryDatabase(connection);
+    const repositoryFactory = new DatabaseRepositoryFactory();
 
-    placeOrder = new PlaceOrder(itemRepository, orderRepository, couponRepository);
+    placeOrder = new PlaceOrder(repositoryFactory);
 });
 
 test("Deve fazer um pedido", async function () {
