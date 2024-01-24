@@ -1,8 +1,7 @@
 import Coupon from "../src/domain/entity/Coupon"
 
 test('Deve criar um cupom de desconto válido', function(){
-    const coupon = new Coupon("VALE20", 20, new Date("2024-01-20"));
-    const today = new Date("2024-01-05");
+    const coupon = new Coupon("VALE20", 20, new Date("2024-01-28"));
     const isValid = coupon.isValid();
 
     expect(isValid).toBeTruthy();

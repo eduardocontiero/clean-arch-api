@@ -13,16 +13,15 @@ beforeEach(function () {
     const connection = MysqlConnectionAdapter.getInstance();
     orderRepository = new OrderRepositoryDatabase(connection);
     const repositoryFactory = new DatabaseRepositoryFactory();
-
     placeOrder = new PlaceOrder(repositoryFactory);
 });
 
 test("Deve fazer um pedido", async function () {
 
-    const cpf = "839.435.452-10";
+
 
     const input = {
-        cpf,
+        cpf: "839.435.452-10",
         orderItems: [
             { idItem: 1, quantity: 1 },
             { idItem: 2, quantity: 1 },
