@@ -17,7 +17,7 @@ export default class ExpressAdapter implements Http {
        });
     }
     listen(port: number): void {
-        throw new Error("Method not implemented.");
+        this.app.listen(port);
     }
     
 }
