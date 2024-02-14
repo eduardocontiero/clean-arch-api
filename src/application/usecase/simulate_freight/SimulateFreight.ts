@@ -1,3 +1,4 @@
+
 import FreightCalculator from "../../../domain/entity/FreightCalculator";
 import ItemRepository from "../../../domain/repository/ItemRepository";
 import SimulateFreightInput from "./SimulateFreightInput";

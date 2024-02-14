@@ -1,19 +1,15 @@
-import GetOrder from "../../application/usecase/get_order/GetOrder";
-import GetOrders from "../../application/usecase/get_orders/GetOrders";
-import RepositoryFactory from "../../domain/factory/RepositoryFactory";
+
+import OrderDAO from "../../application/dao/OrderDAO";
+import GetOrder from "../../application/query/get_order/GetOrder";
 
 export default class GetOrderController {
 
-    constructor(readonly repositoryFactory: RepositoryFactory) {
+	constructor (readonly orderDAO: OrderDAO) {
+	}
 
-    }
-
-    async execute(params: any, body: any) {
-
-        const getOrder = new GetOrder(this.repositoryFactory);
-        const getOrderOutput = await getOrder.execute(params.code);
-        return getOrderOutput;
-
-    }
-
+	async execute (params: any, body: any) {
+		const getOrder = new GetOrder(this.orderDAO);
+		const getOrderOutput = await getOrder.execute(params.code);
+		return getOrderOutput;
+	}
 }

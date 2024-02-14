@@ -1,21 +1,16 @@
 import PlaceOrder from "../../application/usecase/place_order/PlaceOrder";
 import RepositoryFactory from "../../domain/factory/RepositoryFactory";
-import DatabaseRepositoryFactory from "../factory/DatabaseRepositoryFactory";
+import Broker from "../broker/Broker";
 
-export default class PlaceOrderController  {
+export default class PlaceOrderController {
 
-    constructor(readonly repositoryFactory: RepositoryFactory){
-        
-    }
+	constructor (readonly repositoryFactory: RepositoryFactory, readonly broker: Broker) {
+	}
 
-    async execute(params: any, body: any){
-       
-        const placeOrder = new PlaceOrder(this.repositoryFactory);
-        const input = body;
-        input.date = new Date(input.date);
-
-
-        return await placeOrder.execute(input);
-    }
-
+	async execute (params: any, body: any) {
+		const placeOrder = new PlaceOrder(this.repositoryFactory, this.broker);
+		const input = body;
+		if (input.date) input.date = new Date(input.date);
+		return await placeOrder.execute(input);
+	}
 }

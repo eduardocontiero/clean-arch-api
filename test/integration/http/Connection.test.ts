@@ -1,4 +1,4 @@
-import MysqlConnectionAdapter from "../../src/infra/database/MysqlConnectionAdapter";
+import MysqlConnectionAdapter from "../../../src/infra/database/MysqlConnectionAdapter";
 
 test("Deve criar uma conexão com o banco de dados", async function() {
     const connection = MysqlConnectionAdapter.getInstance();
