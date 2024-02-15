@@ -2,7 +2,8 @@
 
 ## Orders API
 
-Esta é uma API desenvolvida com Typescript e Express seguindo os princípios de Clean Architecture. O objetivo principal é garantir uma arquitetura robusta, modular e de fácil manutenção.
+Esta é uma API que simula um checkout básico de ecommerce desenvolvida com Typescript e Express seguindo os princípios de Clean Architecture. O objetivo principal é garantir uma arquitetura robusta, modular e de fácil manutenção.
+
 
 ### Como Rodar
 
